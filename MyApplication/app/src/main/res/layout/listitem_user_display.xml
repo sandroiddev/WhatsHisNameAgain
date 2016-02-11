@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/listitem_user_display_cvMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/listitem_user_display_rlContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/listitem_user_display_imgvUserPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/circle_image"/>
+
+            <TextView
+                android:id="@+id/listitem_user_display_txtvBubble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/lisitem_user_display_textBubble"
+                android:textColor="@android:color/white"
+                style="@android:style/TextAppearance.Material.Headline" />
+
+            <TextView
+                android:id="@+id/listitem_user_display_txtvFirstName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/listitem_user_display_imgvUserPhoto"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/listitem_user_display_firstName"
+                style="@android:style/TextAppearance.Material.Headline" />
+
+            <TextView
+                android:id="@+id/listitem_user_display_txtvLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@+id/listitem_user_display_txtvFirstName"
+                android:text="@string/listitem_user_display_lastName"
+                style="@android:style/TextAppearance.Material.Headline" />
+
+            <TextView
+                android:id="@+id/listitem_user_display_txtvBirthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listitem_user_display_imgvUserPhoto"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/listitem_user_display_birthday"
+                style="@android:style/TextAppearance.Material.Medium"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/listitem_user_display_txtvDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listitem_user_display_txtvBirthday"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/listitem_user_display_DOB"
+                style="@android:style/TextAppearance.Material.Subhead" />
+
+            <TextView
+                android:id="@+id/listitem_user_display_txtvHomeAddy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listitem_user_display_txtvDOB"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/listitem_user_display_home_zip_code"
+                style="@android:style/TextAppearance.Material.Medium"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/listitem_user_display_txtvZipCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listitem_user_display_txtvHomeAddy"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/lisitem_user_display_zipCode"
+                style="@android:style/TextAppearance.Material.Subhead" />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

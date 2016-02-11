@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WhatsHisName</string>
+    <string name="action_settings">Settings</string>
+    <string name="listitem_user_display_firstName">James</string>
+    <string name="listitem_user_display_lastName">Sanders</string>
+    <string name="listitem_user_display_DOB">May 27, 1978</string>
+    <string name="lisitem_user_display_zipCode">75002</string>
+    <string name="listitem_user_display_birthday">Birthday</string>
+    <string name="listitem_user_display_home_zip_code">Home Zip Code</string>
+    <string name="lisitem_user_display_textBubble">JS</string>
+    <string name="content_main_noContacts">Don\'t be sad! Just add more Contacts!</string>
+</resources>
