@@ -10,7 +10,7 @@ public class People {
     private String firstName = null; //First Name of the person
     private String lastName = null; // Last Name of the person
     private String birthday = null; // DOB of the person
-    private int zipCode; // Home Zip Code of the person
+    private String zipCode; // Home Zip Code of the person
 
     //Default Constructor for firebase object mapping.
     public People(){
@@ -44,11 +44,11 @@ public class People {
         this.birthday = birthday;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 }

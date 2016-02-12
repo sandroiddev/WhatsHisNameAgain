@@ -2,12 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:id="@+id/listitem_user_display_cvMain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/primary_light"
+        app:cardCornerRadius="8dp">
 
         <RelativeLayout
             android:id="@+id/listitem_user_display_rlContent"
@@ -18,6 +22,8 @@
                 android:id="@+id/listitem_user_display_imgvUserPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="4dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/circle_image"/>
 
@@ -56,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/listitem_user_display_imgvUserPhoto"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:text="@string/listitem_user_display_birthday"
                 style="@android:style/TextAppearance.Material.Medium"
@@ -90,6 +96,7 @@
                 android:layout_below="@+id/listitem_user_display_txtvHomeAddy"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/lisitem_user_display_zipCode"
                 style="@android:style/TextAppearance.Material.Subhead" />
 

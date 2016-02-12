@@ -9,4 +9,7 @@
     <string name="listitem_user_display_home_zip_code">Home Zip Code</string>
     <string name="lisitem_user_display_textBubble">JS</string>
     <string name="content_main_noContacts">Don\'t be sad! Just add more Contacts!</string>
+    <string name="dialog_addNewPerson_headerMsg">Add a New Person</string>
+    <string name="dialog_savePerson">Save</string>
+    <string name="dialog_addPerson_cancel">Cancel</string>
 </resources>
