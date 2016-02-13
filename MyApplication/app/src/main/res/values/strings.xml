@@ -8,8 +8,13 @@
     <string name="listitem_user_display_birthday">Birthday</string>
     <string name="listitem_user_display_home_zip_code">Home Zip Code</string>
     <string name="lisitem_user_display_textBubble">JS</string>
-    <string name="content_main_noContacts">Don\'t be sad! Just add more Contacts!</string>
+    <string name="content_main_noContacts">No People to see here.\nNo worries though,\nJust click on the Add Button.</string>
     <string name="dialog_addNewPerson_headerMsg">Add a New Person</string>
     <string name="dialog_savePerson">Save</string>
     <string name="dialog_addPerson_cancel">Cancel</string>
+    <string name="menu_add_people_save">Save</string>
+    <string name="add_person_activity_title">Add A New Person</string>
+    <string name="add_person_alert_cancel_msg">Are you sure you want to cancel?</string>
+    <string name="add_person_alert_confirm">Yes</string>
+    <string name="add_person_alert_continue">No, Keep Adding</string>
 </resources>
