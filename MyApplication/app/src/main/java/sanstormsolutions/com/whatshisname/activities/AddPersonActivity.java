@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
@@ -93,9 +93,7 @@ public class AddPersonActivity extends AppCompatActivity {
         // Since we aren't using an unique id in this example, use push()
         mFirebase.child("people").push().setValue(coolPerson);
 
-        /*Toast.makeText(AddPersonActivity.this, "New Person Added", Toast.LENGTH_SHORT).show();*/
-        Snackbar.make(getCurrentFocus(), "New Person Added", Snackbar.LENGTH_SHORT)
-                .setAction("Undo", null).show();
+        Toast.makeText(AddPersonActivity.this, mFirstName.getText().toString() + " " +  mLastName.getText().toString() + " has been added", Toast.LENGTH_SHORT).show();
 
         finish();
     }

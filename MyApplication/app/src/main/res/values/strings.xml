@@ -17,4 +17,5 @@
     <string name="add_person_alert_cancel_msg">Are you sure you want to cancel?</string>
     <string name="add_person_alert_confirm">Yes</string>
     <string name="add_person_alert_continue">No, Keep Adding</string>
+    <string name="main_activity_toolbar_title">What\'s His Name Again?</string>
 </resources>

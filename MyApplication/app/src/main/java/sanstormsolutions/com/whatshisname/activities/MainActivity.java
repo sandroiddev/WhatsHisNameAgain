@@ -14,7 +14,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,25 +31,35 @@ public class MainActivity extends AppCompatActivity {
 
     //Vars
     private FloatingActionButton mFab = null;
-    private Firebase mFirebase;
     private RecyclerView mPeopleRecyclerView = null;
     private PeopleAdapter mPeopleAdapter = null;
     private List<People> ary_fb_peopleList = null;
     private TextView mNoPeopleMsg = null;
     private ImageView mNoPeopleImg = null;
 
+    //Firebase
+    private Firebase mFirebase;
+    private ValueEventListener m_fb_ValueEventListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mFirebase.setAndroidContext(this); //Initialize Firebase
+
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.main_activity_toolbar_title);
         setSupportActionBar(toolbar);
 
-        mFirebase.setAndroidContext(this); //Initialize Firebase
-
         setupViews();
+        setupListeners();
+
+
+        mFirebase = new Firebase(FIREBASE_URL+"/people");
+        mFirebase.addValueEventListener(m_fb_ValueEventListener);
+
     }
 
     @Override
@@ -69,6 +82,46 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume(){
+       super.onResume();
+        //Resume Firebase Listening
+        mFirebase.addValueEventListener(m_fb_ValueEventListener);
+    }
+
+    @Override
+    public void onPause(){
+        //Remove the firebase listener
+        mFirebase.removeEventListener(m_fb_ValueEventListener);
+        super.onPause();
+    }
+
+    private void setupListeners(){
+
+        m_fb_ValueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot != null) {
+                    ary_fb_peopleList.clear();
+
+                    for (DataSnapshot peopleSnapshot : dataSnapshot.getChildren()) {
+                        People peopleData = peopleSnapshot.getValue(People.class);
+                        ary_fb_peopleList.add(peopleData);
+                    }
+                    mPeopleAdapter.notifyDataSetChanged();
+                    mNoPeopleImg.setVisibility(View.GONE);
+                    mNoPeopleMsg.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        };
     }
 
     /***
