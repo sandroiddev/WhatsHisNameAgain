@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    /***
+     * Method for containing all Listeners for this activity
+     */
     private void setupListeners(){
 
         m_fb_ValueEventListener = new ValueEventListener() {
@@ -165,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /***
+     * Simple Method to launch the Add Person Full Screen Dialog.
+     */
     public void addNewPerson(){
         //Show addNewPerson Activity as dialog instead
         Intent intent = new Intent(this, AddPersonActivity.class);

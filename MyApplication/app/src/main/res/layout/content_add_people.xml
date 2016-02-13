@@ -14,7 +14,7 @@
     tools:showIn="@layout/activity_add_people">
 
     <EditText
-        android:id="@+id/dialog_add_people_edtxFirstName"
+        android:id="@+id/content_add_people_edtxFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -29,7 +29,7 @@
         android:fontFamily="sans-serif"/>
 
     <EditText
-        android:id="@+id/dialog_add_people_edtxLastName"
+        android:id="@+id/content_add_people_edtxLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -43,7 +43,7 @@
         android:fontFamily="sans-serif"/>
 
     <EditText
-        android:id="@+id/dialog_add_people_edtxBirthday"
+        android:id="@+id/content_add_people_edtxBirthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -59,7 +59,7 @@
         android:fontFamily="sans-serif"/>
 
     <EditText
-        android:id="@+id/dialog_add_people_edtxZipCode"
+        android:id="@+id/content_add_people_edtxZipCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

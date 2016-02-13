@@ -34,6 +34,7 @@ public class AddPersonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebase.setAndroidContext(this); //Inititalize Firebase
 
         setContentView(R.layout.activity_add_people);
 
@@ -51,8 +52,6 @@ public class AddPersonActivity extends AppCompatActivity {
         });
 
         setupViews(); //Setup the views for this activity
-
-        mFirebase.setAndroidContext(this); //Inititalize Firebase
 
     }
 
@@ -73,14 +72,20 @@ public class AddPersonActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Method to contain all of the views for this activity
+     */
     private void setupViews() {
-        mFirstName = (EditText) findViewById(R.id.dialog_add_people_edtxFirstName);
-        mLastName = (EditText) findViewById(R.id.dialog_add_people_edtxLastName);
-        mBirthday = (EditText) findViewById(R.id.dialog_add_people_edtxBirthday);
-        mZip = (EditText) findViewById(R.id.dialog_add_people_edtxZipCode);
+        mFirstName = (EditText) findViewById(R.id.content_add_people_edtxFirstName);
+        mLastName = (EditText) findViewById(R.id.content_add_people_edtxLastName);
+        mBirthday = (EditText) findViewById(R.id.content_add_people_edtxBirthday);
+        mZip = (EditText) findViewById(R.id.content_add_people_edtxZipCode);
 
     }
 
+    /**
+     * Method to gather the input from the views and save it to Firebase as a new person
+     */
     private void saveNewPerson() {
         People coolPerson = new People();
         coolPerson.setFirstName(mFirstName.getText().toString());
@@ -90,14 +95,20 @@ public class AddPersonActivity extends AppCompatActivity {
 
         //Save Values to Firebase
         mFirebase = new Firebase(FIREBASE_URL);
+
         // Since we aren't using an unique id in this example, use push()
         mFirebase.child("people").push().setValue(coolPerson);
 
+        // Show the user feedback
         Toast.makeText(AddPersonActivity.this, mFirstName.getText().toString() + " " +  mLastName.getText().toString() + " has been added", Toast.LENGTH_SHORT).show();
 
+        // Go back to the display activity
         finish();
     }
 
+    /**
+     * Static class that handles the creation of the Add new person dialog
+     */
     public static class CancelAddNewDialogFragment extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle saveInstanceState) {

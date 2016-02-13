@@ -18,4 +18,6 @@
     <string name="add_person_alert_confirm">Yes</string>
     <string name="add_person_alert_continue">No, Keep Adding</string>
     <string name="main_activity_toolbar_title">What\'s His Name Again?</string>
+    <string name="menu_edit_people_save">Save</string>
+    <string name="edit_people_activity_title">Edit Person</string>
 </resources>
