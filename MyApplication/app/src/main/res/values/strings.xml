@@ -23,6 +23,9 @@
     <string name="edit_person_alert_cancel_msg">Are you sure you want to discard this edit?</string>
     <string name="edit_person_alert_confirm">Yes</string>
     <string name="edit_person_alert_continue">No, Keep Editing</string>
+    <string name="delete_person_alert_cancel_msg">Are you sure you want to delete this person?</string>
+    <string name="delete_person_alert_confirm">Yes</string>
+    <string name="delete_person_alert_continue">No, Keep this person</string>
     <string name="content_add_people_first_name_hint">First Name</string>
     <string name="content_add_people_last_name_hint">Last Name</string>
     <string name="content_add_people_birthday_hint">Birthday (mm/dd/yy)</string>

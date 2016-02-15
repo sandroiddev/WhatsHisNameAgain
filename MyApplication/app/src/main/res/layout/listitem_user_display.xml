@@ -16,7 +16,8 @@
         <RelativeLayout
             android:id="@+id/listitem_user_display_rlContent"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:longClickable="true">
 
             <ImageView
                 android:id="@+id/listitem_user_display_imgvUserPhoto"

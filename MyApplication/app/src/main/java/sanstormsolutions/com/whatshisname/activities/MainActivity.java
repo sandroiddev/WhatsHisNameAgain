@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         mFirebase = new Firebase(FIREBASE_URL + "/people");
         mFirebase.addValueEventListener(m_fb_ValueEventListener);
 
+        ApplicationData.setActivity(this); // reference to the topmost activity
+
     }
 
     @Override
@@ -89,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         //Resume Firebase Listening
         mFirebase.addValueEventListener(m_fb_ValueEventListener);
+        ApplicationData.setActivity(this); // reference to the topmost activity
     }
 
     @Override
