@@ -24,10 +24,12 @@ import java.util.List;
 
 import sanstormsolutions.com.whatshisname.R;
 import sanstormsolutions.com.whatshisname.adapters.PeopleAdapter;
+import sanstormsolutions.com.whatshisname.data.ApplicationData;
 import sanstormsolutions.com.whatshisname.models.People;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String FIREBASE_URL = "https://whatshisnameagain.firebaseio.com"; //Firebase base URL
+    public static final String device_id = ApplicationData.getDeviceID(ApplicationData.getContext());
+    public static final String FIREBASE_URL = "https://whatshisnameagain.firebaseio.com/"+device_id; //Firebase base URL
 
     //Vars
     private FloatingActionButton mFab = null;
@@ -45,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFirebase.setAndroidContext(this); //Initialize Firebase
-
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setupListeners();
 
 
-        mFirebase = new Firebase(FIREBASE_URL+"/people");
+        mFirebase = new Firebase(FIREBASE_URL + "/people");
         mFirebase.addValueEventListener(m_fb_ValueEventListener);
 
     }
@@ -85,14 +85,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
-       super.onResume();
+    public void onResume() {
+        super.onResume();
         //Resume Firebase Listening
         mFirebase.addValueEventListener(m_fb_ValueEventListener);
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         //Remove the firebase listener
         mFirebase.removeEventListener(m_fb_ValueEventListener);
         super.onPause();
@@ -101,21 +101,29 @@ public class MainActivity extends AppCompatActivity {
     /***
      * Method for containing all Listeners for this activity
      */
-    private void setupListeners(){
+    private void setupListeners() {
 
         m_fb_ValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot != null) {
+                if (dataSnapshot != null) {
+                    // Clear the previous list of people. Good idea to start fresh rather than adding to. Just gets messy that way.
                     ary_fb_peopleList.clear();
 
                     for (DataSnapshot peopleSnapshot : dataSnapshot.getChildren()) {
                         People peopleData = peopleSnapshot.getValue(People.class);
                         ary_fb_peopleList.add(peopleData);
                     }
+                    // Let the adapter know we have work for it to do. Thanks adapter.
                     mPeopleAdapter.notifyDataSetChanged();
+
+                    // Be Happy, you have people listed
                     mNoPeopleImg.setVisibility(View.GONE);
                     mNoPeopleMsg.setVisibility(View.GONE);
+                } else {
+                    // Sad face, there are no people listed
+                    mNoPeopleMsg.setVisibility(View.VISIBLE);
+                    mNoPeopleImg.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -138,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         mPeopleAdapter = new PeopleAdapter(ary_fb_peopleList, this, R.layout.listitem_user_display);
 
         mPeopleRecyclerView = (RecyclerView) findViewById(R.id.content_main_rvContactDisplay);
-        mPeopleRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        mPeopleRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mPeopleRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mPeopleRecyclerView.setAdapter(mPeopleAdapter);
 
@@ -158,20 +166,13 @@ public class MainActivity extends AppCompatActivity {
         mNoPeopleMsg = (TextView) findViewById(R.id.content_main_txtvNoContacts);
         mNoPeopleImg = (ImageView) findViewById(R.id.content_main_imgvNoContacts);
 
-        // Check to see if we have people to list. If we don't, make a sad face.
-        if(ary_fb_peopleList.size() == 0){
-            mNoPeopleMsg.setVisibility(View.VISIBLE);
-            mNoPeopleImg.setVisibility(View.VISIBLE);
-        }
-
-
 
     }
 
     /***
      * Simple Method to launch the Add Person Full Screen Dialog.
      */
-    public void addNewPerson(){
+    public void addNewPerson() {
         //Show addNewPerson Activity as dialog instead
         Intent intent = new Intent(this, AddPersonActivity.class);
         startActivity(intent);

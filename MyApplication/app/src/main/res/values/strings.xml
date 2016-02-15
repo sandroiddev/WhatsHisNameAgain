@@ -14,10 +14,21 @@
     <string name="dialog_addPerson_cancel">Cancel</string>
     <string name="menu_add_people_save">Save</string>
     <string name="add_person_activity_title">Add A New Person</string>
-    <string name="add_person_alert_cancel_msg">Are you sure you want to cancel?</string>
+    <string name="add_person_alert_cancel_msg">Are you sure you want to cancel adding a new person?</string>
     <string name="add_person_alert_confirm">Yes</string>
     <string name="add_person_alert_continue">No, Keep Adding</string>
     <string name="main_activity_toolbar_title">What\'s His Name Again?</string>
     <string name="menu_edit_people_save">Save</string>
     <string name="edit_people_activity_title">Edit Person</string>
+    <string name="edit_person_alert_cancel_msg">Are you sure you want to discard this edit?</string>
+    <string name="edit_person_alert_confirm">Yes</string>
+    <string name="edit_person_alert_continue">No, Keep Editing</string>
+    <string name="content_add_people_first_name_hint">First Name</string>
+    <string name="content_add_people_last_name_hint">Last Name</string>
+    <string name="content_add_people_birthday_hint">Birthday (mm/dd/yy)</string>
+    <string name="content_add_people_zip_code_hint">Zip Code</string>
+    <string name="content_edit_people_first_name_hint">First Name</string>
+    <string name="content_edit_people_last_name_hint">Last Name</string>
+    <string name="content_edit_people_birthday_hint">Birthday (mm/dd/yy)</string>
+    <string name="content_edit_people_zip_code_hint">Zip Code</string>
 </resources>

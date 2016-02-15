@@ -1,15 +1,19 @@
 package sanstormsolutions.com.whatshisname.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import sanstormsolutions.com.whatshisname.R;
+import sanstormsolutions.com.whatshisname.activities.EditPeopleActivity;
 import sanstormsolutions.com.whatshisname.models.People;
 
 /**
@@ -21,6 +25,8 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
     private List<People> mPeopleList = null;
     private Context mContext = null;
     private int rowLayout;
+    private View.OnClickListener mOnClickListener = null;
+    private People mPeopleData = null;
 
     //Constructor
     public PeopleAdapter(List<People> people, Context context, int rowLayout){
@@ -34,6 +40,9 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
     public PeopleAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         v = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
+
+        setupListeners();
+
         return new ViewHolder(v);
     }
 
@@ -43,11 +52,17 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
 
         if (mPeopleList != null) {
 
+            // Grab the Person details and set it to display
             holder.mFirstName.setText(contacts.getFirstName());
             holder.mLastName.setText(contacts.getLastName());
             holder.mDOB.setText(contacts.getBirthday());
             holder.mZipCode.setText(contacts.getZipCode());
             holder.mNameBubble.setText(nameBubbleGenerator(contacts));
+
+            mPeopleData = contacts;
+
+            // Handle clicks on the view. This will enter the edit mode.
+            holder.mContent.setOnClickListener(mOnClickListener);
         }
 
 
@@ -59,12 +74,14 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         //Views for the listitem layout
         protected TextView mFirstName = null;
         protected TextView mLastName = null;
         protected TextView mDOB = null;
         protected TextView mZipCode = null;
         protected TextView mNameBubble = null;
+        protected RelativeLayout mContent = null;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -74,9 +91,30 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
             mDOB = (TextView) itemView.findViewById(R.id.listitem_user_display_txtvDOB);
             mZipCode = (TextView) itemView.findViewById(R.id.listitem_user_display_txtvZipCode);
             mNameBubble = (TextView) itemView.findViewById(R.id.listitem_user_display_txtvBubble);
+            mContent = (RelativeLayout) itemView.findViewById(R.id.listitem_user_display_rlContent);
 
 
         }
+    }
+
+    /**
+     * Method to contain all event listeners
+     */
+    private void setupListeners() {
+
+        mOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args;
+                args = new Bundle();
+                args.putParcelable("personData", mPeopleData);
+
+                Intent intent = new Intent(mContext, EditPeopleActivity.class);
+                intent.putExtras(args);
+                mContext.startActivity(intent);
+
+            }
+        };
     }
 
     /***
