@@ -9,10 +9,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -124,6 +127,17 @@ public class EditPeopleActivity extends AppCompatActivity {
 
         mZip = (EditText) findViewById(R.id.content_edit_people_edtxZipCode);
         mZip.setText(zipCode);
+        mZip.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    saveEdits();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
     }
 
     /**

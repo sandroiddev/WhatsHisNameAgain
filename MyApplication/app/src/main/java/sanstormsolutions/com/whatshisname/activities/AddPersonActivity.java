@@ -8,10 +8,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -84,6 +87,17 @@ public class AddPersonActivity extends AppCompatActivity {
         mLastName = (EditText) findViewById(R.id.content_add_people_edtxLastName);
         mBirthday = (EditText) findViewById(R.id.content_add_people_edtxBirthday);
         mZip = (EditText) findViewById(R.id.content_add_people_edtxZipCode);
+        mZip.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE){
+                    saveNewPerson();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
 
     }
 

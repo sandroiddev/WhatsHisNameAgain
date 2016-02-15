@@ -23,7 +23,7 @@
         android:layout_marginBottom="16dp"
         android:hint="@string/content_add_people_first_name_hint"
         android:elegantTextHeight="true"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords|textPersonName"
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorAccent"
         android:fontFamily="sans-serif"/>
@@ -40,7 +40,8 @@
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorAccent"
         android:elegantTextHeight="true"
-        android:fontFamily="sans-serif"/>
+        android:fontFamily="sans-serif"
+        android:inputType="textCapWords" />
 
     <EditText
         android:id="@+id/content_add_people_edtxBirthday"
@@ -73,7 +74,8 @@
         android:maxLength="5"
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/colorAccent"
-        android:fontFamily="sans-serif"/>
+        android:fontFamily="sans-serif"
+        android:imeOptions="actionDone"/>
 
 
 </LinearLayout>
