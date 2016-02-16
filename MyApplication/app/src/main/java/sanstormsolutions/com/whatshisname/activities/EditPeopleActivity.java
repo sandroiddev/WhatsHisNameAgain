@@ -41,11 +41,13 @@ public class EditPeopleActivity extends AppCompatActivity {
 
     //Firebase
     private Firebase mFirebase;
-    private Firebase.CompletionListener m_fb_CompletionListener = null;
+    private Firebase.CompletionListener m_fb_Edit_completeListener = null;
+    private Firebase.CompletionListener m_fb_Delete_completeListener = null;
 
 
     //Vars
     private People mPeopleData = null;
+    private String mUserID = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,7 @@ public class EditPeopleActivity extends AppCompatActivity {
         // Grab data from the intent
         Intent intent = getIntent();
         mPeopleData = intent.getParcelableExtra("personData");
+        mUserID = mPeopleData.getId();
 
         setupViews(mPeopleData);
 
@@ -88,9 +91,14 @@ public class EditPeopleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_edit) {
-            saveEdits();
-            return true;
+        switch (id) {
+            case R.id.action_delete:
+                DialogFragment dialog = new DeleteDialogFragment();
+                dialog.show(getSupportFragmentManager(),"DeleteFragment");
+                return true;
+            case R.id.action_edit:
+                saveEdits();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -153,7 +161,7 @@ public class EditPeopleActivity extends AppCompatActivity {
         editPerson.put("zipCode", mZip.getText().toString());
 
         Firebase updateRef = mFirebase.child(personID);
-        updateRef.updateChildren(editPerson, m_fb_CompletionListener);
+        updateRef.updateChildren(editPerson, m_fb_Edit_completeListener);
 
     }
 
@@ -163,7 +171,7 @@ public class EditPeopleActivity extends AppCompatActivity {
     private void setupListeners() {
 
         // Firebase Listener to see if the transaction was completed
-        m_fb_CompletionListener = new Firebase.CompletionListener() {
+        m_fb_Edit_completeListener = new Firebase.CompletionListener() {
             @Override
             public void onComplete(FirebaseError firebaseError, Firebase firebase) {
                 if (firebaseError != null) {
@@ -175,6 +183,28 @@ public class EditPeopleActivity extends AppCompatActivity {
                 } else {
                     // Show the user feedback
                     Toast.makeText(EditPeopleActivity.this, mFirstName.getText().toString() + " " + mLastName.getText().toString() + " changes have been saved", Toast.LENGTH_SHORT).show();
+
+                    // Go back to the display activity
+                    finish();
+                }
+            }
+
+
+        };
+
+        // Firebase Listener to see if the transaction was completed
+        m_fb_Delete_completeListener = new Firebase.CompletionListener() {
+            @Override
+            public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                if (firebaseError != null) {
+                    Toast.makeText(EditPeopleActivity.this, "Delete was not successful", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, firebaseError.getMessage());
+
+                    // Go back to the display activity
+                    finish();
+                } else {
+                    // Show the user feedback
+                    Toast.makeText(EditPeopleActivity.this, "Contact has been removed", Toast.LENGTH_SHORT).show();
 
                     // Go back to the display activity
                     finish();
@@ -212,6 +242,44 @@ public class EditPeopleActivity extends AppCompatActivity {
                     });
             return builder.create();
         }
+    }
+
+    /**
+     * Static class that handles the creation of the Cancel Edit Alert Dialog
+     */
+    public class DeleteDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle saveInstanceState) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(getString(R.string.delete_person_alert_cancel_msg))
+                    .setPositiveButton(getString(R.string.delete_person_alert_confirm), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //User wants to cancel the add
+                            deletePerson();
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton(getString(R.string.delete_person_alert_continue), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //User wants to remove the person
+                            dialog.cancel();
+                        }
+                    });
+            return builder.create();
+        }
+    }
+
+    /**
+     * Method to save the edits to the specified Person to Firebase
+     */
+    private void deletePerson() {
+        Firebase updateRef = mFirebase.child(mUserID);
+        updateRef.setValue(null, m_fb_Delete_completeListener);
+
     }
 
 

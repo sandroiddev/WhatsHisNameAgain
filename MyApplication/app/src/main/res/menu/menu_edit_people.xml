@@ -5,6 +5,12 @@
     tools:context=".activities.EditPeopleActivity">
 
     <item
+        android:id="@+id/action_delete"
+        android:icon="@drawable/action_bar_general_delete"
+        android:title="@string/menu_edit_delete"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/action_edit"
         android:title="@string/menu_edit_people_save"
         app:showAsAction="always"/>

@@ -34,4 +34,11 @@
     <string name="content_edit_people_last_name_hint">Last Name</string>
     <string name="content_edit_people_birthday_hint">Birthday (mm/dd/yy)</string>
     <string name="content_edit_people_zip_code_hint">Zip Code</string>
+    <string name="menu_edit_delete">Delete</string>
+    <string name="content_about_summary">Thank you so much for taking the time to look at my sample application. I have worn many hats in the technology space, but have fallen in love with mobile application development. If you have any questions or if you\'re interested in talking about how I can help your company, please don\'t hesitate to contact me.</string>
+    <string name="content_about_linkedIn">https://www.linkedin.com/in/jsandersii</string>
+    <string name="content_about_gmail">jamessandersii@gmail.com</string>
+    <string name="content_about_cell">734–218–4389</string>
+    <string name="menu_main_about_me">About Me</string>
+    <string name="about_activity_title">Hi, I\'m James Sanders</string>
 </resources>
