@@ -122,13 +122,15 @@ public class MainActivity extends AppCompatActivity {
                     // Let the adapter know we have work for it to do. Thanks adapter.
                     mPeopleAdapter.notifyDataSetChanged();
 
-                    // Be Happy, you have people listed
-                    mNoPeopleImg.setVisibility(View.GONE);
-                    mNoPeopleMsg.setVisibility(View.GONE);
-                } else {
-                    // Sad face, there are no people listed
-                    mNoPeopleMsg.setVisibility(View.VISIBLE);
-                    mNoPeopleImg.setVisibility(View.VISIBLE);
+                    if (ary_fb_peopleList.size() > 0) {
+                        // Be Happy, you have people listed
+                        mNoPeopleImg.setVisibility(View.GONE);
+                        mNoPeopleMsg.setVisibility(View.GONE);
+                    }else {
+                        // Sad face, there are no people listed
+                        mNoPeopleMsg.setVisibility(View.VISIBLE);
+                        mNoPeopleImg.setVisibility(View.VISIBLE);
+                    }
                 }
 
             }
