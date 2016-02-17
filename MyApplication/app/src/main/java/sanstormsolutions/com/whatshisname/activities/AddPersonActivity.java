@@ -106,10 +106,34 @@ public class AddPersonActivity extends AppCompatActivity {
      */
     private void saveNewPerson() {
         People coolPerson = new People();
-        coolPerson.setFirstName(mFirstName.getText().toString());
-        coolPerson.setLastName(mLastName.getText().toString());
-        coolPerson.setBirthday(mBirthday.getText().toString());
-        coolPerson.setZipCode(mZip.getText().toString());
+        //Check to see if the fields have been entered, and if so add them to the object.
+        if (mFirstName.getText().toString().isEmpty()){
+            Toast.makeText(AddPersonActivity.this, "First Name must be entered", Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            coolPerson.setFirstName(mFirstName.getText().toString());
+        }
+
+        if (mLastName.getText().toString().isEmpty()){
+            Toast.makeText(AddPersonActivity.this, "Last Name must be entered", Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            coolPerson.setLastName(mLastName.getText().toString());
+        }
+
+        if (mBirthday.getText().toString().isEmpty()){
+            Toast.makeText(AddPersonActivity.this, "Birthday must be entered", Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            coolPerson.setBirthday(mBirthday.getText().toString());
+        }
+
+        if (mZip.getText().toString().isEmpty()){
+            Toast.makeText(AddPersonActivity.this, "Zip Code must be entered", Toast.LENGTH_SHORT).show();
+            return;
+        }else{
+            coolPerson.setZipCode(mZip.getText().toString());
+        }
 
         //Save Values to Firebase
         mFirebase = new Firebase(FIREBASE_URL);
